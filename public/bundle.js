@@ -6071,7 +6071,7 @@ const Counter = () => {
   const decrement = () => {
     // dispatch({ type: 'counter/decrement' });
     let token = window.localStorage.getItem("token");
-    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.decrementInDB)());
+    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.decrementInDB)(token));
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     let token = window.localStorage.getItem("token");

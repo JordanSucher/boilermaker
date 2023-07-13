@@ -22,7 +22,7 @@ const Counter = () => {
     const decrement = () => {
         // dispatch({ type: 'counter/decrement' });
         let token = window.localStorage.getItem("token")
-        dispatch(decrementInDB());
+        dispatch(decrementInDB(token));
     }
 
     useEffect(() => {
