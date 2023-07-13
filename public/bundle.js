@@ -6059,20 +6059,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //grab token from local storage
-const token = window.localStorage.getItem("token");
+let token = window.localStorage.getItem("token");
 const Counter = () => {
   const count = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.counterReducer.value);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const increment = () => {
     // dispatch({ type: 'counter/increment' });
-    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.incrementInDB)());
+    let token = window.localStorage.getItem("token");
+    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.incrementInDB)(token));
   };
   const decrement = () => {
     // dispatch({ type: 'counter/decrement' });
+    let token = window.localStorage.getItem("token");
     dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.decrementInDB)());
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.syncState)());
+    let token = window.localStorage.getItem("token");
+    dispatch((0,_store_mainReducer__WEBPACK_IMPORTED_MODULE_2__.syncState)(token));
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Boilermaker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: decrement
@@ -6256,8 +6259,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //grab token from local storage
-const token = window.localStorage.getItem("token");
-const incrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/incrementInDB", async () => {
+// const token = window.localStorage.getItem("token");
+
+const incrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/incrementInDB", async token => {
   const response = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("api/users/increment", {}, {
     headers: {
       Authorization: token
@@ -6265,7 +6269,7 @@ const incrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsy
   });
   return response.data;
 });
-const decrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/decrementInDB", async () => {
+const decrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/decrementInDB", async token => {
   const response = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("api/users/decrement", {}, {
     headers: {
       Authorization: token
@@ -6273,7 +6277,7 @@ const decrementInDB = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsy
   });
   return response.data;
 });
-const syncState = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/syncState", async () => {
+const syncState = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("counter/syncState", async token => {
   const response = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("api/users/currentcount", {
     headers: {
       Authorization: token

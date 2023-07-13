@@ -3,11 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //grab token from local storage
-const token = window.localStorage.getItem("token");
+// const token = window.localStorage.getItem("token");
 
 const incrementInDB = createAsyncThunk(
     "counter/incrementInDB",
-    async () =>  {
+    async (token) =>  {
         const response = await axios.post("api/users/increment", {}, {
             headers: {
                 Authorization: token
@@ -20,7 +20,7 @@ const incrementInDB = createAsyncThunk(
 
 const decrementInDB = createAsyncThunk(
     "counter/decrementInDB",
-    async () =>  {
+    async (token) =>  {
         const response = await axios.post("api/users/decrement", {}, {
             headers: {
                 Authorization: token
@@ -33,7 +33,7 @@ const decrementInDB = createAsyncThunk(
 
 const syncState = createAsyncThunk(
     "counter/syncState",
-    async () => {
+    async (token) => {
         const response = await axios.get("api/users/currentcount", {
             headers: {
                 Authorization: token

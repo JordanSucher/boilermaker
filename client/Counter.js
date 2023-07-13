@@ -4,7 +4,7 @@ import { incrementInDB, decrementInDB, syncState } from './store/mainReducer';
 import {useEffect} from 'react';
 
 //grab token from local storage
-const token = window.localStorage.getItem("token");
+let token = window.localStorage.getItem("token");
 
 
 
@@ -15,16 +15,19 @@ const Counter = () => {
 
     const increment = () => {
         // dispatch({ type: 'counter/increment' });
-        dispatch(incrementInDB());
+        let token = window.localStorage.getItem("token")
+        dispatch(incrementInDB(token));
     }
 
     const decrement = () => {
         // dispatch({ type: 'counter/decrement' });
+        let token = window.localStorage.getItem("token")
         dispatch(decrementInDB());
     }
 
     useEffect(() => {
-        dispatch(syncState());
+        let token = window.localStorage.getItem("token")
+        dispatch(syncState(token));
     },[])
 
     return (
